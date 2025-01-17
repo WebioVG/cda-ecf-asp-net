@@ -1,0 +1,44 @@
+﻿@model List<Event>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1 class="text-center">Liste des événements</h1>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Titre</th>
+        <th>Description</th>
+        <th>Date de début</th>
+        <th>Date de fin</th>
+        <th>Lieu</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var eventItem in Model)
+    {
+        <tr>
+            <td>@eventItem.Title</td>
+            <td>@eventItem.Description</td>
+            <td>@eventItem.StartDate.ToString("g")</td>
+            <td>@eventItem.EndDate.ToString("g")</td>
+            <td>@eventItem.Location</td>
+            <td>
+                <a asp-action="Register" asp-route-id="@eventItem.Id" class="btn btn-primary btn-sm">
+                    S'inscrire
+                </a>
+                <a asp-action="Edit" asp-route-id="@eventItem.Id" class="btn btn-warning btn-sm">
+                    Modifier
+                </a>
+                <form asp-action="Delete" asp-route-id="@eventItem.Id" method="post" style="display:inline;"
+                      onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet événement ?');">
+                    <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

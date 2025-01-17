@@ -1,4 +1,5 @@
 using cda_ecf_asp_net;
+using cda_ecf_asp_net.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Cookie.SameSite = SameSiteMode.Strict;
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
 });
+builder.Services.AddScoped<IEventRepository, EventRepository>();
 
 // Add database connection string
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -37,7 +39,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=Event}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 
