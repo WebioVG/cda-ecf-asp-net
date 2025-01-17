@@ -1,5 +1,22 @@
 # cda-ecf-asp-net
 
+The aim of the project is to have a working interface to display, add, update and delete events.
+People can register to the events using their first name, last name, email and phone number.
+Statistics are shown in a dedicated view.
+
+## Conception
+
+### Design
+
+The mockups can be found [here](https://www.figma.com/design/GbJtSK4FEvkm1PBekKiX2h/cda-ecf-asp-net?node-id=0-1&p=f).
+
+### Database structure
+
+A SQL database manages the events and their participants as follows.
+![Database UML](./ecf-uml-sql.png)
+
+MongoDB is also used to store stats.
+
 ## Prerequisites
 
 Before starting, ensure you have the following installed:

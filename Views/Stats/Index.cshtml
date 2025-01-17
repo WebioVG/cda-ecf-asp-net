@@ -1,0 +1,91 @@
+@model StatsViewModel
+
+@{
+    ViewData["Title"] = "Statistiques des événements";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">@ViewData["Title"]</h1>
+
+    <!-- Success/Error Messages -->
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success">@TempData["Message"]</div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+    <!-- Button to Populate MongoDB Stats -->
+    <div class="text-end mb-3">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Stats" asp-action="Populate">Actualiser les valeurs</a>
+    </div>
+
+    <!-- Stats Display -->
+    <div class="row">
+        <!-- Total Events -->
+        <div class="col-md-4">
+            <div class="card border-primary mb-3">
+                <div class="card-header bg-primary text-white">Total d'événements</div>
+                <div class="card-body">
+                    <h5 class="card-title">@Model.TotalEvents</h5>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upcoming Events -->
+        <div class="col-md-4">
+            <div class="card border-success mb-3">
+                <div class="card-header bg-success text-white">Evénements à venir</div>
+                <div class="card-body">
+                    <h5 class="card-title">@Model.UpcomingEvents</h5>
+                </div>
+            </div>
+        </div>
+
+        <!-- Past Events -->
+        <div class="col-md-4">
+            <div class="card border-danger mb-3">
+                <div class="card-header bg-danger text-white">Evénements passés</div>
+                <div class="card-body">
+                    <h5 class="card-title">@Model.PastEvents</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Average Duration -->
+        <div class="col-md-6">
+            <div class="card border-info mb-3">
+                <div class="card-header bg-info text-white">Durée moyenne (heures)</div>
+                <div class="card-body">
+                    <h5 class="card-title">@Model.AverageDurationInHours</h5>
+                </div>
+            </div>
+        </div>
+
+        <!-- Average Participants per Event -->
+        <div class="col-md-6">
+            <div class="card border-warning mb-3">
+                <div class="card-header bg-warning text-dark">Nombre moyen de participants par événement</div>
+                <div class="card-body">
+                    <h5 class="card-title">@Model.AverageParticipantsPerEvent</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Most Popular Event -->
+        <div class="col-md-12">
+            <div class="card border-dark mb-3">
+                <div class="card-header bg-dark text-white">Evénement le plus populaire</div>
+                <div class="card-body">
+                    <h5 class="card-title">@((Model.MostPopularEvent ?? "N/A"))</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

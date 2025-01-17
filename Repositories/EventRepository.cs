@@ -62,4 +62,57 @@ public class EventRepository : IEventRepository
         _context.Events.Remove(existingEvent);
         await _context.SaveChangesAsync();
     }
+    
+    public async Task<long> GetTotalEventsAsync()
+    {
+        return await _context.Events.LongCountAsync();
+    }
+
+    public async Task<long> GetUpcomingEventsAsync()
+    {
+        return await _context.Events.CountAsync(e => e.StartDate > DateTime.UtcNow);
+    }
+
+    public async Task<long> GetPastEventsAsync()
+    {
+        return await _context.Events.CountAsync(e => e.EndDate < DateTime.UtcNow);
+    }
+
+    public async Task<double> GetAverageEventDurationAsync()
+    {
+        var durations = await _context.Events
+            .Select(e => EF.Functions.DateDiffHour(e.StartDate, e.EndDate))
+            .ToListAsync();
+
+        return durations.Any() ? durations.Average() : 0;
+    }
+
+    public async Task<double> GetAverageParticipantsPerEventAsync()
+    {
+        var participantCounts = await _context.Events
+            .GroupJoin(
+                _context.EventParticipants,
+                e => e.Id,
+                ep => ep.EventId,
+                (e, participants) => participants.Count()
+            )
+            .ToListAsync();
+
+        return participantCounts.Any() ? participantCounts.Average() : 0;
+    }
+
+    public async Task<string?> GetMostPopularEventAsync()
+    {
+        var mostPopular = await _context.Events
+            .GroupJoin(
+                _context.EventParticipants,
+                e => e.Id,
+                ep => ep.EventId,
+                (e, participants) => new { e.Title, ParticipantCount = participants.Count() }
+            )
+            .OrderByDescending(e => e.ParticipantCount)
+            .FirstOrDefaultAsync();
+
+        return mostPopular?.Title;
+    }
 }

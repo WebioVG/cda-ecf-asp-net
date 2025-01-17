@@ -9,4 +9,10 @@ public interface IEventRepository
     public Task<Event?> Create(Event? @event);
     public Task<Event> Update(Event @event);
     public Task Delete(Event @event);
+    public Task<long> GetTotalEventsAsync();
+    public Task<long> GetUpcomingEventsAsync();
+    public Task<long> GetPastEventsAsync();
+    public Task<double> GetAverageEventDurationAsync();
+    public Task<double> GetAverageParticipantsPerEventAsync();
+    public Task<string?> GetMostPopularEventAsync();
 }

@@ -230,3 +230,9 @@
 /Users/k.kowalsky/Dev/dotnet/cda-ecf-asp-net/obj/Debug/net9.0/cda-ecf-asp-net.pdb
 /Users/k.kowalsky/Dev/dotnet/cda-ecf-asp-net/obj/Debug/net9.0/cda-ecf-asp-net.genruntimeconfig.cache
 /Users/k.kowalsky/Dev/dotnet/cda-ecf-asp-net/obj/Debug/net9.0/ref/cda-ecf-asp-net.dll
+/Users/k.kowalsky/Dev/dotnet/cda-ecf-asp-net/bin/Debug/net9.0/DnsClient.dll
+/Users/k.kowalsky/Dev/dotnet/cda-ecf-asp-net/bin/Debug/net9.0/MongoDB.Bson.dll
+/Users/k.kowalsky/Dev/dotnet/cda-ecf-asp-net/bin/Debug/net9.0/MongoDB.Driver.dll
+/Users/k.kowalsky/Dev/dotnet/cda-ecf-asp-net/bin/Debug/net9.0/SharpCompress.dll
+/Users/k.kowalsky/Dev/dotnet/cda-ecf-asp-net/bin/Debug/net9.0/Snappier.dll
+/Users/k.kowalsky/Dev/dotnet/cda-ecf-asp-net/bin/Debug/net9.0/ZstdSharp.dll

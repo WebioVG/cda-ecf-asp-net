@@ -9,10 +9,16 @@
 
 @if (Model.Event != null)
 {
-    <h3>Événement: @Model.Event.Title</h3>
-    <p><strong>Description:</strong> @Model.Event.Description</p>
-    <p><strong>Lieu:</strong> @Model.Event.Location</p>
-    <p><strong>Date:</strong> @Model.Event.StartDate.ToString("g") - @Model.Event.EndDate.ToString("g")</p>
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <h3 class="card-title mb-0">Événement: @Model.Event.Title</h3>
+        </div>
+        <div class="card-body">
+            <p><strong>Description:</strong> @Model.Event.Description</p>
+            <p><strong>Lieu:</strong> @Model.Event.Location</p>
+            <p><strong>Date:</strong> @Model.Event.StartDate.ToString("g") - @Model.Event.EndDate.ToString("g")</p>
+        </div>
+    </div>
 }
 
 <form asp-action="Register" method="post">

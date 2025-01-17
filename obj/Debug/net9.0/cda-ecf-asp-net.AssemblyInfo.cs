@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("cda-ecf-asp-net")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dd334df187d16aea76d08c7b2d3a5c0ed4baa1a4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b82b8c506884c725761e3cc72a77dda4f29833ae")]
 [assembly: System.Reflection.AssemblyProductAttribute("cda-ecf-asp-net")]
 [assembly: System.Reflection.AssemblyTitleAttribute("cda-ecf-asp-net")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
