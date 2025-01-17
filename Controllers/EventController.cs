@@ -9,11 +9,13 @@ public class EventController : Controller
 {
     private readonly ILogger<EventController> _logger;
     private readonly IEventRepository _eventRepository;
+    private readonly IParticipantRepository _participantRepository;
 
-    public EventController(ILogger<EventController> logger, IEventRepository eventRepository)
+    public EventController(ILogger<EventController> logger, IEventRepository eventRepository, IParticipantRepository participantRepository)
     {
         _logger = logger;
         _eventRepository = eventRepository;
+        _participantRepository = participantRepository;
     }
 
     public async Task<IActionResult> Index()
@@ -41,15 +43,51 @@ public class EventController : Controller
     }
     
     [HttpGet]
-    public IActionResult Register(int id)
+    public async Task<IActionResult> Register(int id)
     {
-        var @event = _eventRepository.GetById(id);
+        var @event = await _eventRepository.GetById(id);
         if (@event == null)
         {
-            return NotFound();
+            return NotFound($"L'événement n'a pas été trouvé.");
         }
 
-        return View(@event);
+        var viewModel = new EventRegistrationViewModel
+        {
+            Event = @event
+        };
+
+        return View(viewModel);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Register(EventRegistrationViewModel viewModel)
+    {
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                // Ensure Event.Id is valid
+                if (viewModel.Event?.Id == null)
+                {
+                    return BadRequest("L'événement est introuvable.");
+                }
+
+                // Generate a registration token and register the participant
+                viewModel.Participant.RegistrationToken = Guid.NewGuid();
+                await _participantRepository.RegisterToEvent(viewModel.Event.Id, viewModel.Participant);
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Une erreur est survenue : {ex.Message}");
+            }
+        }
+
+        // Reload the Event data if ModelState is invalid
+        viewModel.Event = await _eventRepository.GetById(viewModel.Event.Id);
+        return View(viewModel);
     }
 
     [HttpGet]
