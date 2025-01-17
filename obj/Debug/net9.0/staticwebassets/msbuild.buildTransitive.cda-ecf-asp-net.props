@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/cda-ecf-asp-net.props" />
+</Project>
